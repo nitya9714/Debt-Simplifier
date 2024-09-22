@@ -174,7 +174,7 @@ int main()
         graph[borrower - 1][giver - 1] += amount;
     }
 
-    // Example of a predefined graph (commented out)
+    // Example of a predefined graph
     /*
     vector<vector<int>> graph = {
         {0, 1000, 2000},
