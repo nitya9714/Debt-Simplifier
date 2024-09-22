@@ -115,8 +115,8 @@ private:
             }
 
             // Print result
-            cout << "Person " << debtor << " pays "
-                 << owed_amount << " to Person " << creditor
+            cout << "Person " << debtor + 1 << " pays "
+                 << owed_amount << " to Person " << creditor + 1
                  << endl;
         }
     }
@@ -150,18 +150,43 @@ public:
 
 int main()
 {
-    // Test case 1
+    // Input the number of group members
+    cout << "Enter number of members in group:" << endl;
     int n;
-
     cin >> n;
-    vector<vector<int>> graph(n, vector<int>(n));
+
+    // Create a 2D vector (graph) to store debts between members
+    vector<vector<int>> graph(n, vector<int>(n, 0));
+
+    // Input the number of debts (transactions)
+    cout << "Enter number of debts:" << endl;
+    int m;
+    cin >> m;
+
+    // Input details of each debt: borrower, giver, and amount
+    cout << "Enter debts where the first number is the borrower, second is the giver, and third is the amount:" << endl;
+    for (int i = 0; i < m; i++)
+    {
+        int borrower, giver, amount;
+        cin >> borrower >> giver >> amount;
+
+        // Update the graph: add the amount to the borrower's debt to the giver
+        graph[borrower - 1][giver - 1] += amount;
+    }
+
+    // Example of a predefined graph (commented out)
+    /*
     vector<vector<int>> graph = {
         {0, 1000, 2000},
         {0, 0, 5000},
         {0, 0, 0},
     };
+    */
 
-    cout << "Simplified Debt" << endl;
+    // Output the simplified debt settlement
+    cout << "Simplified Debt Settlement:" << endl;
+
+    // Create an instance of Solution and call minCashFlow to settle debts
     Solution S;
     S.minCashFlow(graph);
 
